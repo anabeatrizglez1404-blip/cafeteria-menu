@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador QR Funcional - Cafetería</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+            background: #f0f0f0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+        .qr-area {
+            margin: 30px 0;
+            padding: 30px;
+            border: 3px solid #3498db;
+            border-radius: 15px;
+            background: white;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s ease;
+        }
+        .btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        .btn-print {
+            background: #27ae60;
+        }
+        .btn-print:hover {
+            background: #229954;
+        }
+        .info {
+            background: #ecf0f1;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: left;
+            border-left: 4px solid #3498db;
+        }
+        .error {
+            background: #ffebee;
+            color: #c62828;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border: 2px solid #ffcdd2;
+        }
+        .success {
+            background: #e8f5e8;
+            color: #2e7d32;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border: 2px solid #c8e6c9;
+        }
+        .loading {
+            color: #3498db;
+            font-size: 18px;
+        }
+        .qr-image {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>☕ Generador de Código QR - Cafetería</h1>
+        
+        <div class="info">
+            <strong>📋 Instrucciones:</strong>
+            <ol>
+                <li>Haz clic en "Generar Código QR"</li>
+                <li>Espera a que se genere el código</li>
+                <li>Haz clic en "Imprimir" para imprimirlo</li>
+            </ol>
+        </div>
+        
+        <button class="btn" onclick="generarQR()">🔄 Generar Código QR</button>
+        <button class="btn btn-print" onclick="imprimir()">🖨️ Imprimir</button>
+        
+        <div class="qr-area" id="qrArea">
+            <p class="loading">⏳ Haz clic en "Generar Código QR" para comenzar</p>
+        </div>
+        
+        <div class="info">
+            <strong>🔗 URL del menú:</strong> menu.html<br>
+            <strong>📏 Tamaño del QR:</strong> 300x300 píxeles<br>
+            <strong>⭐ Calidad:</strong> Alta (nivel H de corrección de errores)
+        </div>
+    </div>
+
+    <!-- Cargar la librería QR desde un CDN alternativo -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    
+    <script>
+        let qrCode = null;
+        
+        // Función para generar el código QR
+        function generarQR() {
+            const qrArea = document.getElementById('qrArea');
+            
+            // Limpiar el área y mostrar loading
+            qrArea.innerHTML = '<p class="loading">⏳ Generando código QR...</p>';
+            
+            // URL del menú
+            const urlMenu = 'menu.html';
+            
+            try {
+                // Limpiar QR anterior si existe
+                if (qrCode) {
+                    qrArea.innerHTML = '';
+                }
+                
+                // Crear nuevo elemento para el QR
+                const qrDiv = document.createElement('div');
+                qrDiv.id = 'qrCodeDiv';
+                qrArea.appendChild(qrDiv);
+                
+                // Generar el código QR
+                qrCode = new QRCode(qrDiv, {
+                    text: urlMenu,
+                    width: 300,
+                    height: 300,
+                    colorDark: '#000000',
+                    colorLight: '#FFFFFF',
+                    correctLevel: QRCode.CorrectLevel.H
+                });
+                
+                // Mostrar mensaje de éxito
+                setTimeout(() => {
+                    const successMsg = document.createElement('div');
+                    successMsg.className = 'success';
+                    successMsg.innerHTML = '✅ <strong>Código QR generado exitosamente!</strong><br>El código QR está listo para imprimir.';
+                    qrArea.appendChild(successMsg);
+                }, 500);
+                
+                console.log('Código QR generado exitosamente');
+                
+            } catch (error) {
+                console.error('Error generando QR:', error);
+                qrArea.innerHTML = '<div class="error">❌ <strong>Error generando código QR:</strong><br>' + error.message + '</div>';
+            }
+        }
+        
+        // Función para imprimir
+        function imprimir() {
+            if (qrCode) {
+                window.print();
+            } else {
+                alert('Primero debes generar el código QR');
+            }
+        }
+        
+        // Generar automáticamente al cargar la página
+        window.addEventListener('load', function() {
+            // Esperar 2 segundos para que se cargue todo
+            setTimeout(generarQR, 2000);
+        });
+        
+        // También generar con F5
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'F5') {
+                e.preventDefault();
+                generarQR();
+            }
+        });
+        
+        // Verificar si la librería se cargó correctamente
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                if (typeof QRCode === 'undefined') {
+                    const qrArea = document.getElementById('qrArea');
+                    qrArea.innerHTML = '<div class="error">❌ <strong>Error:</strong> No se pudo cargar la librería QR.<br>Verifica tu conexión a internet e intenta recargar la página.</div>';
+                }
+            }, 3000);
+        });
+    </script>
+</body>
+</html>

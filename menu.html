@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú - Cafetería</title>
+    <link rel="stylesheet" href="menu-styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header menu-header">
+            <div class="header-content">
+                <h1>☕ Cafetería</h1>
+                <p>Nuestro menú completo</p>
+            </div>
+            <button class="back-btn" onclick="goBack()">← Volver</button>
+        </header>
+        
+        <main class="main-content">
+            <div class="menu-categories">
+                <button class="category-btn active" data-category="bebidas">Bebidas</button>
+                <button class="category-btn" data-category="comidas">Comidas</button>
+                <button class="category-btn" data-category="postres">Postres</button>
+                <button class="category-btn" data-category="snacks">Snacks</button>
+            </div>
+            
+            <div class="menu-content">
+                <!-- Bebidas -->
+                <div class="category-section active" id="bebidas">
+                    <h2>Bebidas</h2>
+                    <div class="products-grid">
+                        <div class="product-card">
+                            <div class="product-image">☕</div>
+                            <div class="product-info">
+                                <h3>Café Americano</h3>
+                                <p class="description">Café negro tradicional</p>
+                                <p class="price">$2.50</p>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-image">☕</div>
+                            <div class="product-info">
+                                <h3>Café con Leche</h3>
+                                <p class="description">Café con leche cremosa</p>
+                                <p class="price">$3.00</p>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-image">☕</div>
+                            <div class="product-info">
+                                <h3>Cappuccino</h3>
+                                <p class="description">Espresso con espuma de leche</p>
+                                <p class="price">$3.50</p>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-image">🍵</div>
+                            <div class="product-info">
+                                <h3>Té Verde</h3>
+                                <p class="description">Té verde natural</p>
+                                <p class="price">$2.00</p>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-image">🥤</div>
+                            <div class="product-info">
+                                <h3>Jugo Natural</h3>
+                                <p class="description">Jugo de naranja fresco</p>
+                                <p class="price">$3.50</p>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-image">🥤</div>
+                            <div class="product-info">
+                                <h3>Limonada</h3>
+                                <p class="description">Limonada casera</p>
+                                <p class="price">$3.00</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Comidas -->
+                <div class="category-section" id="comidas">
+                    <h2>Comidas</h2>
+                    <div class="products-grid">
+                        <div class="product-card">
+                            <div class="product-image">🥪</div>
+                            <div class="product-info">
+                                <h3>Sándwich de Jamón</h3>
+                                <p class="description">Jamón, queso y vegetales</p>
+                                <p class="price">$6.50</p>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-image">🥪</div>
+                            <div class="product-info">
+                                <h3>Sándwich de Pollo</h3>
+                                <p class="description">Pollo a la plancha con lechuga</p>
+                                <p class="price">$7.00</p>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-image">🥗</div>
+                            <div class="product-info">
+                                <h3>Ensalada César</h3>
+                                <p class="description">Lechuga, crutones y aderezo</p>
+                                <p class="price">$8.50</p>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-image">🍝</div>
+                            <div class="product-info">
+                                <h3>Pasta Carbonara</h3>
+                                <p class="description">Pasta con salsa cremosa</p>
+                                <p class="price">$9.50</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Postres -->
+                <div class="category-section" id="postres">
+                    <h2>Postres</h2>
+                    <div class="products-grid">
+                        <div class="product-card">
+                            <div class="product-image">🍰</div>
+                            <div class="product-info">
+                                <h3>Pastel de Chocolate</h3>
+                                <p class="description">Delicioso pastel casero</p>
+                                <p class="price">$4.50</p>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-image">🍮</div>
+                            <div class="product-info">
+                                <h3>Flan Casero</h3>
+                                <p class="description">Flan tradicional con caramelo</p>
+                                <p class="price">$3.50</p>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-image">🍪</div>
+                            <div class="product-info">
+                                <h3>Galletas Caseras</h3>
+                                <p class="description">Galletas de mantequilla</p>
+                                <p class="price">$2.50</p>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-image">🧁</div>
+                            <div class="product-info">
+                                <h3>Cupcake de Vainilla</h3>
+                                <p class="description">Cupcake con frosting</p>
+                                <p class="price">$3.00</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Snacks -->
+                <div class="category-section" id="snacks">
+                    <h2>Snacks</h2>
+                    <div class="products-grid">
+                        <div class="product-card">
+                            <div class="product-image">🥨</div>
+                            <div class="product-info">
+                                <h3>Pretzels</h3>
+                                <p class="description">Pretzels salados</p>
+                                <p class="price">$2.00</p>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-image">🥜</div>
+                            <div class="product-info">
+                                <h3>Mix de Frutos Secos</h3>
+                                <p class="description">Almendras, nueces y pasas</p>
+                                <p class="price">$4.00</p>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-image">🍿</div>
+                            <div class="product-info">
+                                <h3>Palomitas</h3>
+                                <p class="description">Palomitas de maíz</p>
+                                <p class="price">$2.50</p>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-image">🥨</div>
+                            <div class="product-info">
+                                <h3>Galletas Saladas</h3>
+                                <p class="description">Galletas saladas crujientes</p>
+                                <p class="price">$1.50</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <footer class="footer">
+            <p>&copy; 2024 Cafetería. Todos los derechos reservados.</p>
+        </footer>
+    </div>
+
+    <script src="menu-script.js"></script>
+</body>
+</html>
